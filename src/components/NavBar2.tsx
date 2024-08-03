@@ -27,6 +27,7 @@ interface NavBar2Props {
   isHalfSangam?: boolean;
   isFullSangam?: boolean;
   isTripplePanna?: boolean;
+  isTransfer?: boolean;
 }
 // Define the type for each transaction in the statement
 type DataType = {
@@ -70,6 +71,7 @@ export const NavBar2: React.FC<NavBar2Props> = ({
   isTripplePanna,
   isHalfSangam,
   isFullSangam,
+  isTransfer,
 }) => {
   const navigate = useNavigate();
 
@@ -245,6 +247,20 @@ export const NavBar2: React.FC<NavBar2Props> = ({
         <div className="navbar-main p-3 mb-6 text-left flex items-center text-white">
           <FaArrowLeft onClick={() => navigate(-1)} cursor="pointer" />
           <button className="ml-3 flex items-center font-bold">Wallet</button>
+        </div>
+      ) : null}
+
+      {isTransfer ? (
+        <div className="navbar-main p-3 mb-6 text-left flex items-center text-white">
+          <FaArrowLeft onClick={() => navigate(-1)} cursor="pointer" />
+          <button className="ml-3 flex items-center font-bold">transfer</button>
+          <button className="text-right w-100 flex justify-end align-center items-center ml-2">
+            {" "}
+            <span className="mr-2">
+              <FaWallet size={30} />{" "}
+            </span>{" "}
+            {transcationData?.available_points}
+          </button>
         </div>
       ) : null}
     </>

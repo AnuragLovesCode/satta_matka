@@ -73,9 +73,10 @@ const Wallet = () => {
     const data = await response.json();
     const trans = await data.data.transfer;
     if (trans == "1") {
-      toast.success("You are Eligible")
+      toast.success("You are Eligible");
+      navigate("/Transfer");
     } else {
-      toast.error("You are not Eligible")
+      toast.error("You are not Eligible");
     }
   };
   return (
@@ -131,9 +132,7 @@ const Wallet = () => {
               className="bg-white rounded-lg shadow-md p-4 flex justify-between items-center border-l-4 border-green-500 mt-2"
             >
               <div className="text-left">
-                <p className="text font-bold text-custom">
-                  {item.trans_msg}
-                </p>
+                <p className="text font-bold text-custom">{item.trans_msg}</p>
                 <p
                   className={`text-lg font-semibold ${
                     item.trans_type === "credit"
@@ -155,7 +154,7 @@ const Wallet = () => {
           );
         })}
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 };

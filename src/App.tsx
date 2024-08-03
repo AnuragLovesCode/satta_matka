@@ -34,6 +34,7 @@ import HalfSangam from "./components/HalfSangam";
 import FullSangam from "./components/FullSangam";
 import TripplePanna from "./components/TripplePanna";
 import JodiPanna from "./components/JodiPanna";
+import Transfer from "./components/Transfer";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -155,6 +156,8 @@ function App() {
           <Route path="/HalfSangam" element={<HalfSangam />} />
 
           <Route path="/FullSangam" element={<FullSangam />} />
+
+          <Route path="/transfer" element={<Transfer />} />
 
           <Route path="/GameRates" element={isLoggedIn ? (<GameRates />) : (
             <Navigate to="/login" />

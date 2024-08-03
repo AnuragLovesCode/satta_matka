@@ -1,0 +1,350 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@500;800&display=swap');
+
+body {
+  max-width: 550px; /* Add 'px' unit */
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  /* height: 100vh; */
+  font-family: "Montserrat", sans-serif;
+
+  /* background-color: #101a4f; */
+  padding: 0 !important; /* Use '0' instead of '0px' */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+  padding-bottom: 30px !important;
+}
+.react-datepicker-wrapper{
+  display: inherit !important;
+}
+.wallet-row-reverse {
+  flex-direction: row-reverse;
+}
+.css-1f8bwsm {
+  min-width: 30px !important;
+  color: rgba(0, 0, 0, 0.54);
+  flex-shrink: 0;
+  display: inline-flex;
+  color: #fff !important;
+}
+h2.choose_session {
+  color: #0f1a4f;
+}
+z-99{
+  z-index: 999;
+}
+/* .add-points {
+  margin: 85px;
+} */
+.wallet-btn {
+  z-index: 9999;
+  /* bottom: 0; */
+  padding: 10px 30px;
+  margin-top: 85px !important;
+  margin-right: 36px;
+}
+.security-pin {
+  background: #101A4F;
+}
+.container.mx-auto.gamerates button {
+  justify-content: space-between;
+}
+.container.primary-text button {
+  font-size: 11px;
+  width: 100%;
+}
+
+.MuiListItemIcon-root.css-cveggr-MuiListItemIcon-root svg {
+  color: #fff;
+  padding-left: 0px;
+}
+.navbar-main.p-3 {
+  background: #101A4F;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+
+
+/* .MuiPaper-root {
+  left: 32% !important;
+  width: 30%;
+  background-color:#101A4F !important;
+  color: #fff !important;
+} */
+.satta-matka-home {
+  background: #101A4F;
+  overflow: scroll !important;
+  height: 50vh;
+}
+.text-custom{
+  color: #101A4F;
+}
+button.add-payment-method {
+  background: #6200ED;
+  /* display: flex; */
+}
+.btn-card {
+  padding: 10px 30px;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  margin: 10px 0;
+  display: inline-block;
+  background-image: linear-gradient(to right top, #089e4e, #03973f, #008f2f, #00881d, #008001);
+  border-radius:50px;
+}
+
+:root {
+  --custom-blue: #101A4F;
+  background-color: #fff;
+}
+.custom-blue-1{
+  background: #101A4F;
+}
+.MuiListItemText-root.css-tlelie-MuiListItemText-root span {
+  padding-left: 20px;
+}
+.container.primary-text button {
+  text-align: -webkit-center;
+}
+.main-wrap button {
+  text-align: -webkit-center;
+}
+.custom-color{
+  background-color: #101A4F;
+  height: 100%;
+}
+.custom-green{
+  background-color: #008001;
+}
+.custom-blue{
+  background: #0099CB;
+}
+.custom-purple{
+  background: #6200ED;
+}
+
+/* .parent-slider.max-w-screen-lg.mx-auto img {
+  height: 50vh;
+  object-fit: cover;
+} */
+a.btn-card-closed {
+  padding: 5px 20px;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  margin: 8px 40px;
+  display: inline-block;
+  background-image: linear-gradient(to right top, #e00a4b, #dc3545, #d85305, #c95206, #c31223);
+}
+/* .MuiPaper-root {
+  left: 32.5%;
+  width: 31%;
+} */
+
+.sidebar-left {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 100%;
+  line-height: 42px;
+  background: #fff; 
+  /* color: #000 !important; */
+}
+.slick-dots{
+  padding: 30px;
+  color: #fff !important;
+  bottom: 15px !important;
+}
+.text-white.text-sm.font-medium.flex.items-center svg {
+  margin-right: 10px;
+}
+.bg-white-700.p-4.sidebar-left span {
+  border-bottom: 1px solid #ddd;
+}
+.buttons-new.flex.justify-center.mt-8 .mx-2 {
+  padding: 5px;
+  text-align: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-weight: 500;
+  color: #fff;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  border: 2px solid #fff;
+}
+.website-star-line .mx-2 {
+  background: #fff;
+  padding: 10px 26px;
+  margin: 20px 10px;
+  border-radius: 50px;
+  color: #000;
+}
+/* .card-bg {
+  background: #4169E1;
+} */
+
+.justify-between {
+  justify-content: space-between;
+  display: flex;
+}
+.card-bg .mt-2.text-black {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #83d706;
+  padding: 10px;
+  background: #f8f8f8;
+  align-items: center;
+}
+.card-new.p-5 b {
+  color: white;
+  background-image: palegoldenrod;
+  padding: 5px 8px;
+  border-radius: 5px;
+  background-image: linear-gradient(to right top, #0d5407, #104d06, #124604, #133f03, #133801);
+}
+
+.card-new.p-2 {
+  border: 1px solid #ddd;
+  box-shadow: 0 0 2px #666;
+  border-radius: 15px;
+  margin: 10px;
+  background: #fff;
+}
+.card-new.p-8 {
+  border-bottom: 5px solid #fff;
+  color: #fff !important;
+}
+.main-wrap {
+  display: flex;
+  margin: 20px 0px;
+}
+.css-cveggr-MuiListItemIcon-root{
+  min-width: 20px !important;
+}
+.main-wrap button {
+  margin-left: 5px;
+}
+.container.primary-text {
+  background: #101A4F;
+  padding: 15px;
+  margin: 0px 0 20px 0;
+}
+.login-primary {
+  background: #101A4F;
+}
+.flex.flex-col.w-64.bg-gray-800.h-screen {
+  position: absolute;
+  z-index: 999;
+  top: 62px;
+  height: auto;
+}
+a.btn-card {
+  padding: 5px 20px;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  margin: 10px 25px;
+  display: inline-block;
+  background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+}
+.marquee {
+  white-space: nowrap;
+  overflow: hidden;
+  animation: marquee 10s linear infinite;
+}
+button.slick-arrow.slick-next {
+  display: none !important;
+}
+
+button.slick-arrow.slick-prev {
+  display: none !important;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+
+.App {
+  text-align: center;
+  /* background-color: #0f1a4f; */
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+input.my-custom-datepicker {
+  border-radius: 18px;
+  margin: 10px 0 10px 0;
+  height: 40px;
+  color: #000;
+  padding-left: 19px;
+  width: 100%;
+  border: 1px solid #0f1a4f;
+}
+p.mt-2.text-white.space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #010713;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+@media (min-width:550px)  {
+
+  body {
+    max-width: 550px; /* Add 'px' unit */
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    /* height: 100vh; */
+    font-family: "Montserrat", sans-serif;
+
+    background-color: #eee;
+    padding: 0 !important; /* Use '0' instead of '0px' */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    /* background: #0f1a4f; */
+    padding-bottom: 30px !important;
+  }
+  .container.primary-text button {
+    font-size: 11px;
+}
+  
+
+}

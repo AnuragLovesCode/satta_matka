@@ -102,6 +102,13 @@ const Withdraw = () => {
         <h2 className="font-bold text-custom mt-4 text-xl">
           Select Payment Method
         </h2>
+        <select>
+
+          <option>Phone Pe</option>
+          <option>Paytm</option>
+          <option>Google Pe</option>
+          <option>Bank</option>
+        </select>
 
         <div className="mt-4 flex flex-col sm:flex-row justify-between items-start">
           <button className="add-payment-method hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-md mb-2 sm:mb-0 mr-2 w-full sm:w-auto">

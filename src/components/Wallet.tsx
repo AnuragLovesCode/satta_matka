@@ -117,7 +117,7 @@ const Wallet = () => {
           </button>
           {/* Transfer Button */}
           <button
-            className="bg-white shadow-md flex justify-center py-3 rounded-lg flex items-center justify-center hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
+            className="bg-white shadow-md flex justify-center py-3 rounded-lg  items-center   hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
             onClick={hendleTransfer}
           >
             <FaExchangeAlt className="text-xl mr-2" />

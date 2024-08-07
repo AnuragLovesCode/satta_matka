@@ -3,35 +3,62 @@ import { FaCoins, FaMobileAlt, FaGoogle, FaPaypal } from "react-icons/fa";
 import { NavBar2 } from "./NavBar2";
 import { useNavigate } from "react-router-dom";
 
-const Withdraw = () => {
+// Define the type for a payment method
+interface PaymentMethod {
+  label: string;
+  value: string;
+}
+
+const Withdraw: React.FC = () => {
   const token = localStorage.getItem("token") || "";
-  const [openTime, setOpenTime] = useState("");
-  const [closeTime, setCloseTime] = useState("");
+  const [openTime, setOpenTime] = useState<string>("");
+  const [closeTime, setCloseTime] = useState<string>("");
+  const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>([]);
+  const [points, setPoints] = useState<string>("");
+  const [selectedPaymentMethod, setSelectedPaymentMethod] =
+    useState<string>("");
   const navigate = useNavigate();
 
-  const createPayment = async () => {
+  const fetchBankDetails = async () => {
     try {
-      const response = await fetch("https://smapidev.co.in/api/Api/withdraw", {
-        method: "POST",
-        // body: formData,
-        headers: {
-          token,
+      const response = await fetch(
+        "https://development.smapidev.co.in/api/Api/get_user_details",
+        {
+          headers: {
+            token,
           "Content-Type": "application/x-www-form-urlencoded",
           Cookie: "ci_session=0b0000be09ab15b1746f67a94c05d0d6761be9f3",
-        },
-      });
-      response
-        .json()
-        .then((data: any) => {
-          alert(data.message);
-          // navigate("/login")
-        })
-        .catch((error: any) => {
-          console.log({ error });
-          alert(error);
-        });
-    } catch (error) {}
+          },
+        }
+      );
+
+      const data = await response.json();
+      const {
+        phonepe_mobile_no,
+        gpay_mobile_no,
+        bank_account_no,
+        paytm_mobile_no,
+      } = data.data;
+
+      console.log(data.data);
+
+      // Only include the keys that have non-empty values
+      const availableMethods: PaymentMethod[] = [
+        { label: "PhonePe No", value: phonepe_mobile_no },
+        { label: "GPay No", value: gpay_mobile_no },
+        { label: "Account No", value: bank_account_no },
+        { label: "Paytm No", value: paytm_mobile_no },
+      ].filter((method) => method.value);
+
+      setPaymentMethods(availableMethods);
+    } catch (error) {
+      console.error("ERROR", error);
+    }
   };
+
+  useEffect(() => {
+    fetchBankDetails();
+  }, []);
 
   useEffect(() => {
     const fetchContactDetails = async () => {
@@ -41,15 +68,40 @@ const Withdraw = () => {
         );
         if (!response.ok) throw new Error("contact details is not fetched");
         const data = await response.json();
-        // setContactDetails(data.data.contact_details);
         setOpenTime(data.data.withdraw_open_time);
         setCloseTime(data.data.withdraw_close_time);
+        console.log(data);
       } catch (error) {
         console.error("there is a problem in fetching data", error);
       }
     };
     fetchContactDetails(); // fetchContactDetails calling here
   }, []);
+
+  const createPayment = async () => {
+    // Assuming selectedPaymentMethod holds the actual value like 'phonepe_mobile_no'
+    const formData = new URLSearchParams();
+    formData.append("points", points);
+    formData.append("method", selectedPaymentMethod); // This sends the value of the selected method
+
+    try {
+      const response = await fetch(
+        "https://development.smapidev.co.in/api/Api/withdraw",
+        {
+          method: "POST",
+          headers: {
+            token,
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: formData,
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Failed to create payment:", error);
+    }
+  };
 
   return (
     <div className="px-15">
@@ -76,7 +128,7 @@ const Withdraw = () => {
           className="flex flex-col items-center space-y-1 border border-green-500 text-green-500 px-4 py-2 rounded-md pl-4"
           onClick={() => navigate("/phonepe")}
         >
-          <FaMobileAlt className="text-3xl" /> <span>Phone Pay</span>
+          <FaMobileAlt className="text-3xl" /> <span>PhonePe</span>
         </button>
         <button
           className="flex flex-col items-center space-y-1 border border-yellow-500 text-yellow-500 px-4 py-2 rounded-md pl-4"
@@ -103,6 +155,8 @@ const Withdraw = () => {
           type="number"
           name="amount"
           id="amount"
+          value={points}
+          onChange={(e) => setPoints(e.target.value)}
           placeholder="Enter Amount"
           className="mt-1 p-2 block w-full border border-black-800 rounded-md text-custom"
         />
@@ -113,18 +167,23 @@ const Withdraw = () => {
         <h2 className="font-bold text-custom mt-4 text-xl">
           Select Payment Method
         </h2>
-        <select>
-          <option>Phone Pe</option>
-          <option>Paytm</option>
-          <option>Google Pe</option>
-          <option>Bank</option>
+        <select
+          className="mt-1 p-2 block w-full border border-black-800 rounded-md text-custom"
+          value={selectedPaymentMethod}
+          onChange={(e) => setSelectedPaymentMethod(e.target.value)} // This will set the actual value like phonepe_mobile_no
+        >
+          {paymentMethods.map((method, index) => (
+            <option key={index} value={method.value}>
+              {method.label}
+            </option>
+          ))}
         </select>
 
-        <div className="mt-4 flex flex-col sm:flex-row justify-between items-start">
-          <button className="add-payment-method hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-md mb-2 sm:mb-0 mr-2 w-full sm:w-auto">
-            ADD PAYMENT METHOD
-          </button>
-          <button className="custom-color hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-md w-full sm:w-auto ">
+        <div className="mt-4 flex flex-col sm:flex-row justify-between items-start w-full">
+          <button
+            className="custom-color hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-md  sm:w-auto w-full"
+            onClick={createPayment}
+          >
             SUBMIT REQUEST
           </button>
         </div>

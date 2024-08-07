@@ -119,7 +119,7 @@ const Wallet = () => {
             className="bg-white shadow-md text-custom py-3 rounded-lg flex items-center justify-center hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
             onClick={handlePaymentMethods}
           >
-            <FaExchangeAlt className="text-xl mr-2" />
+            <FaExchangeAlt className="text-xl mr-1" />
             <span>Payment Method</span>
           </button>
           {/* Transfer Button */}

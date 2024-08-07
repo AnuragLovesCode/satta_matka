@@ -5,51 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 const PaymentMethods = () => {
   const token = localStorage.getItem("token") || "";
-  const [openTime, setOpenTime] = useState("");
-  const [closeTime, setCloseTime] = useState("");
+
   const navigate = useNavigate();
-
-  const createPayment = async () => {
-    try {
-      const response = await fetch("https://smapidev.co.in/api/Api/withdraw", {
-        method: "POST",
-        // body: formData,
-        headers: {
-          token,
-          "Content-Type": "application/x-www-form-urlencoded",
-          Cookie: "ci_session=0b0000be09ab15b1746f67a94c05d0d6761be9f3",
-        },
-      });
-      response
-        .json()
-        .then((data: any) => {
-          alert(data.message);
-          // navigate("/login")
-        })
-        .catch((error: any) => {
-          console.log({ error });
-          alert(error);
-        });
-    } catch (error) {}
-  };
-
-  useEffect(() => {
-    const fetchContactDetails = async () => {
-      try {
-        const response = await fetch(
-          "https://development.smapidev.co.in/api/Api/app_details"
-        );
-        if (!response.ok) throw new Error("contact details is not fetched");
-        const data = await response.json();
-        // setContactDetails(data.data.contact_details);
-        setOpenTime(data.data.withdraw_open_time);
-        setCloseTime(data.data.withdraw_close_time);
-      } catch (error) {
-        console.error("there is a problem in fetching data", error);
-      }
-    };
-    fetchContactDetails(); // fetchContactDetails calling here
-  }, []);
 
   return (
     <div className="px-15">

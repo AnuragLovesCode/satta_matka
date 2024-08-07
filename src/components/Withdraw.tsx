@@ -1,4 +1,4 @@
-import React, { useEffect , useState} from "react";
+import  { useEffect , useState} from "react";
 import { FaCoins, FaMobileAlt, FaGoogle, FaPaypal } from "react-icons/fa";
 import { NavBar2 } from "./NavBar2";
 import { useNavigate } from "react-router-dom";
@@ -67,16 +67,16 @@ const Withdraw = () => {
         </h2>
       </div>
       <div className="container flex overflow-x-auto space-x-4">
-        <button className="flex flex-col items-center space-y-1 border border-blue-900 text-blue-500 px-4 py-2 rounded-md pl-4">
+        <button className="flex flex-col items-center space-y-1 border border-blue-900 text-blue-500 px-4 py-2 rounded-md pl-4" onClick={()=>navigate("/bank-details")}>
           <FaCoins className="text-3xl" /> <span>Bank</span>
         </button>
-        <button className="flex flex-col items-center space-y-1 border border-green-500 text-green-500 px-4 py-2 rounded-md pl-4">
+        <button className="flex flex-col items-center space-y-1 border border-green-500 text-green-500 px-4 py-2 rounded-md pl-4" onClick={()=>navigate("/phonepe")}>
           <FaMobileAlt className="text-3xl" /> <span>Phone Pay</span>
         </button>
         <button className="flex flex-col items-center space-y-1 border border-yellow-500 text-yellow-500 px-4 py-2 rounded-md pl-4" onClick={()=>navigate("/gpay")}>
           <FaGoogle className="text-3xl" /> <span>Google Pay</span>
         </button>
-        <button className="flex flex-col items-center space-y-1 border border-indigo-500 text-indigo-500 px-4 py-2 rounded-md pl-4"> 
+        <button className="flex flex-col items-center space-y-1 border border-indigo-500 text-indigo-500 px-4 py-2 rounded-md pl-4" onClick={()=>navigate("/paytm")}> 
           <FaPaypal className="text-3xl" /> <span>Paytm</span>
         </button>
       </div>

@@ -7,7 +7,7 @@ import { toast, ToastContainer } from "react-toastify";
 const GpayDetails = () => {
   const token = localStorage.getItem("token") || "";
   const [number, setNumber] = useState("");
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const verfifyGpayDetails = async () => {
     const formData = new URLSearchParams();
@@ -29,15 +29,13 @@ const GpayDetails = () => {
 
       toast.success(data.message);
       setTimeout(() => {
-        navigate('/wallet')
+        navigate("/wallet");
       }, 2000);
     } catch (error) {
       console.error("ERROR", error);
       toast.error("An Erro ocuurs during verfication");
     }
   };
-
-  
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -61,18 +59,21 @@ const GpayDetails = () => {
                   placeholder="Enter phone number"
                   type="text"
                   className="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-950 focus:border-transparent"
-                  onChange={(e)=>setNumber(e.target.value)}
+                  onChange={(e) => setNumber(e.target.value)}
                 />
               </div>
             </div>
           </div>
           <div className="mt-6">
-            <button className="w-full px-4 py-2 bg-blue-950 text-white rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-950 focus:ring-opacity-50 transition duration-200 ease-in-out flex items-center justify-center" onClick={verfifyGpayDetails}>
+            <button
+              className="w-full px-4 py-2 bg-blue-950 text-white rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-950 focus:ring-opacity-50 transition duration-200 ease-in-out flex items-center justify-center"
+              onClick={verfifyGpayDetails}
+            >
               <FaGoogle className="mr-2" />
               Verify with Google Pay
             </button>
           </div>
-          <ToastContainer/>
+          <ToastContainer />
         </div>
       </div>
     </div>

@@ -60,6 +60,10 @@ const Wallet = () => {
     navigate("/withdraw"); // Navigate to the home page
   };
 
+  const handlePaymentMethods = () => {
+    navigate("/payment-methods");
+  };
+
   const hendleTransfer = async () => {
     const user_status_API =
       "https://development.smapidev.co.in/api/Api/user_status";
@@ -111,9 +115,12 @@ const Wallet = () => {
           </button>
         </div>
         <div className="grid grid-cols-2 gap-4 mb-4">
-          <button className="bg-white shadow-md text-custom py-3 rounded-lg flex items-center justify-center hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300">
+          <button
+            className="bg-white shadow-md text-custom py-3 rounded-lg flex items-center justify-center hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
+            onClick={handlePaymentMethods}
+          >
             <FaExchangeAlt className="text-xl mr-2" />
-            <span>Bank Method</span>
+            <span>Payment Method</span>
           </button>
           {/* Transfer Button */}
           <button

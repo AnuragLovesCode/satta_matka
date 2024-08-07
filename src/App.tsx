@@ -44,6 +44,7 @@ import GpayDetails from "./components/GpayDetails";
 import PhonePay from "./components/PhonePay";
 import PayTmDetails from "./components/PayTmDetails";
 import BankDetails from "./components/BankDetails";
+import PaymentMethods from "./components/PaymentMethods";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -169,8 +170,9 @@ function App() {
           <Route path="/transfer" element={<Transfer />} />
           <Route path="/gpay" element={<GpayDetails />} />
           <Route path="/phonepe" element={<PhonePay />} />
-          <Route path="paytm" element={<PayTmDetails/>}/>
-          <Route path="/bank-details" element={<BankDetails/>}/>
+          <Route path="paytm" element={<PayTmDetails />} />
+          <Route path="/bank-details" element={<BankDetails />} />
+          <Route path="/payment-methods" element={<PaymentMethods />} />
 
           <Route
             path="/GameRates"

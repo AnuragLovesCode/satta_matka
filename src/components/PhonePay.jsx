@@ -1,18 +1,55 @@
 import React, { useEffect, useState } from "react";
-import {  FaMobileAlt } from "react-icons/fa";
+import { FaMobileAlt } from "react-icons/fa";
 import { NavBar2 } from "./NavBar2";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 const PhonePay = () => {
   const token = localStorage.getItem("token") || "";
+  const [number, setNumber] = useState("");
+  const navigate = useNavigate();
+
+  const verfifyPhonePeDetails = async () => {
+    const formData = new URLSearchParams();
+    formData.append("phonepe", number);
+
+    try {
+      const response = await fetch(
+        "https://development.smapidev.co.in/api/Api/update_phonepe",
+        {
+          method: "POST",
+          headers: {
+            token,
+          },
+          body: formData,
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+
+      toast.success(data.message);
+      setTimeout(() => {
+        navigate("/wallet");
+      }, 2000);
+    } catch (error) {
+      console.error("ERROR", error);
+      toast.error("An Erro ocuurs during verfication");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-100">
       <NavBar2 isWithdraw={true} />
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-2xl font-bold text-center mb-6 text-blue-950">PhonePe Details</h2>
+          <h2 className="text-2xl font-bold text-center mb-6 text-blue-950">
+            PhonePe Details
+          </h2>
           <div className="mb-4">
-            <label htmlFor="phone_number" className="block text-gray-700 text-sm font-bold mb-2 text-left">
+            <label
+              htmlFor="phone_number"
+              className="block text-gray-700 text-sm font-bold mb-2 text-left"
+            >
               Phone Number
             </label>
             <div className="flex">
@@ -22,19 +59,23 @@ const PhonePay = () => {
                   placeholder="Enter phone number"
                   type="text"
                   className="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-950 focus:border-transparent"
+                  onChange={(e) => setNumber(e.target.value)}
                 />
               </div>
-              
             </div>
           </div>
           <div className="mt-6">
-            <button className="w-full px-4 py-2 bg-blue-950 text-white rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-950 focus:ring-opacity-50 transition duration-200 ease-in-out flex items-center justify-center">
+            <button
+              className="w-full px-4 py-2 bg-blue-950 text-white rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-950 focus:ring-opacity-50 transition duration-200 ease-in-out flex items-center justify-center"
+              onClick={verfifyPhonePeDetails}
+            >
               <FaMobileAlt className="mr-2" />
               Verify with Phone Pay
             </button>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

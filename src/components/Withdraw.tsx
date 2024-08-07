@@ -1,11 +1,13 @@
 import React, { useEffect , useState} from "react";
 import { FaCoins, FaMobileAlt, FaGoogle, FaPaypal } from "react-icons/fa";
 import { NavBar2 } from "./NavBar2";
+import { useNavigate } from "react-router-dom";
 
 const Withdraw = () => {
   const token = localStorage.getItem("token") || "";
   const [openTime, setOpenTime] = useState('')
   const [closeTime, setCloseTime] = useState('')
+  const navigate=useNavigate()
 
   const createPayment = async () => {
     try {
@@ -71,10 +73,10 @@ const Withdraw = () => {
         <button className="flex flex-col items-center space-y-1 border border-green-500 text-green-500 px-4 py-2 rounded-md pl-4">
           <FaMobileAlt className="text-3xl" /> <span>Phone Pay</span>
         </button>
-        <button className="flex flex-col items-center space-y-1 border border-yellow-500 text-yellow-500 px-4 py-2 rounded-md pl-4">
+        <button className="flex flex-col items-center space-y-1 border border-yellow-500 text-yellow-500 px-4 py-2 rounded-md pl-4" onClick={()=>navigate("/gpay")}>
           <FaGoogle className="text-3xl" /> <span>Google Pay</span>
         </button>
-        <button className="flex flex-col items-center space-y-1 border border-indigo-500 text-indigo-500 px-4 py-2 rounded-md pl-4">
+        <button className="flex flex-col items-center space-y-1 border border-indigo-500 text-indigo-500 px-4 py-2 rounded-md pl-4"> 
           <FaPaypal className="text-3xl" /> <span>Paytm</span>
         </button>
       </div>

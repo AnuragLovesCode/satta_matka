@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/NavBar";
@@ -16,7 +21,7 @@ import WinHistory from "./components/WinHistory";
 import { Funds } from "./components/Funds";
 import { Help } from "./components/Help";
 import SecurityPin from "./components/SecurityPin";
-import { MadhurNight } from "./components/MadhurNight"
+import { MadhurNight } from "./components/MadhurNight";
 import GameTime from "./components/GameTime";
 import EditProfile from "./components/EditProfile";
 import Withdraw from "./components/Withdraw";
@@ -35,11 +40,11 @@ import FullSangam from "./components/FullSangam";
 import TripplePanna from "./components/TripplePanna";
 import JodiPanna from "./components/JodiPanna";
 import Transfer from "./components/Transfer";
+import GpayDetails from "./components/GpayDetails";
 
 function App() {
   const token = localStorage.getItem("token");
   const isLoggedIn = useSelector((state: any) => state.auth.isLoggedIn);
-
 
   return (
     <div className="App">
@@ -60,92 +65,93 @@ function App() {
             {/* <Route path="/" element={<Home />} /> */}
             <Route
               path="/"
-              element={
-                isLoggedIn ? (
-                  <Home />
-                ) : (
-                  <Navigate to="/login" />
-                )
-              }
+              element={isLoggedIn ? <Home /> : <Navigate to="/login" />}
             />
           </Route>
 
           <Route element={<WithoutNavbar />}>
-            <Route
-              path="/ForgotPassword"
-              element={<ForgotPassword />} />
+            <Route path="/ForgotPassword" element={<ForgotPassword />} />
           </Route>
 
           <Route element={<WithoutNavbar />}>
             <Route
               path="/starline"
-              element={isLoggedIn ? (<StarLine />) : (<Navigate to="/login" />)} />
+              element={isLoggedIn ? <StarLine /> : <Navigate to="/login" />}
+            />
           </Route>
           <Route element={<WithoutNavbar />}>
-            <Route path="/bidhistory" element={isLoggedIn ? (<BidHistory />) : (
-              <Navigate to="/login" />
-            )} />
+            <Route
+              path="/bidhistory"
+              element={isLoggedIn ? <BidHistory /> : <Navigate to="/login" />}
+            />
           </Route>
           <Route element={<WithoutNavbar />}>
-            <Route path="/winhistory" element={isLoggedIn ? (<WinHistory />) : (
-              <Navigate to="/login" />
-            )} />
-          </Route>
-
-          <Route element={<WithoutNavbar />}>
-            <Route path="/funds" element={isLoggedIn ? (<Funds />) : (
-              <Navigate to="/login" />
-            )} />
+            <Route
+              path="/winhistory"
+              element={isLoggedIn ? <WinHistory /> : <Navigate to="/login" />}
+            />
           </Route>
 
           <Route element={<WithoutNavbar />}>
-            <Route path="/help" element={isLoggedIn ? (<Help />) :
-              (
-                <Navigate to="/login" />
-              )
-            } />
+            <Route
+              path="/funds"
+              element={isLoggedIn ? <Funds /> : <Navigate to="/login" />}
+            />
+          </Route>
+
+          <Route element={<WithoutNavbar />}>
+            <Route
+              path="/help"
+              element={isLoggedIn ? <Help /> : <Navigate to="/login" />}
+            />
           </Route>
 
           <Route element={<MadhurNight />}>
-            <Route path="/madhurnight" element={isLoggedIn ? (<MadhurNight />) : (
-              <Navigate to="/login" />
-            )} />
+            <Route
+              path="/madhurnight"
+              element={isLoggedIn ? <MadhurNight /> : <Navigate to="/login" />}
+            />
           </Route>
           <Route element={<GameTime />}>
-            <Route path="/gametime" element={isLoggedIn ? (<GameTime />) : (
-              <Navigate to="/login" />
-            )} />
+            <Route
+              path="/gametime"
+              element={isLoggedIn ? <GameTime /> : <Navigate to="/login" />}
+            />
           </Route>
 
           <Route element={<EditProfile />}>
-            <Route path="/editprofile" element={isLoggedIn ? (<EditProfile />) : (
-              <Navigate to="/login" />
-            )} />
+            <Route
+              path="/editprofile"
+              element={isLoggedIn ? <EditProfile /> : <Navigate to="/login" />}
+            />
           </Route>
-
 
           <Route element={<Withdraw />}>
-            <Route path="/withdraw" element={isLoggedIn ? (<Withdraw />) : (
-              <Navigate to="/login" />
-            )} />
+            <Route
+              path="/withdraw"
+              element={isLoggedIn ? <Withdraw /> : <Navigate to="/login" />}
+            />
           </Route>
 
-
           <Route element={<VerifyOtp />}>
-            <Route path="/VerifyOtp" element={isLoggedIn ? (<VerifyOtp />) : (
-              <Navigate to="/login" />
-            )} />
+            <Route
+              path="/VerifyOtp"
+              element={isLoggedIn ? <VerifyOtp /> : <Navigate to="/login" />}
+            />
           </Route>
 
           <Route element={<ChangePassword />}>
-            <Route path="/ChangePassword" element={isLoggedIn ? (<ChangePassword />) : (
-              <Navigate to="/login" />
-            )} />
+            <Route
+              path="/ChangePassword"
+              element={
+                isLoggedIn ? <ChangePassword /> : <Navigate to="/login" />
+              }
+            />
           </Route>
 
           <Route path="/DoublePanna" element={<DoublePanna />} />
 
-          <Route path="/JodiDigit" element={<JodiPanna />} />  
+          <Route path="/JodiDigit" element={<JodiPanna />} />
 
           <Route path="/SinglePanna" element={<SinglePanna />} />
 
@@ -158,19 +164,22 @@ function App() {
           <Route path="/FullSangam" element={<FullSangam />} />
 
           <Route path="/transfer" element={<Transfer />} />
+          <Route path="/gpay" element={<GpayDetails />} />
 
-          <Route path="/GameRates" element={isLoggedIn ? (<GameRates />) : (
-            <Navigate to="/login" />
-          )} />
+          <Route
+            path="/GameRates"
+            element={isLoggedIn ? <GameRates /> : <Navigate to="/login" />}
+          />
 
-          <Route path="/ContactUs" element={isLoggedIn ? (<ContactUs />) : (
-            <Navigate to="/login" />
-          )} />
+          <Route
+            path="/ContactUs"
+            element={isLoggedIn ? <ContactUs /> : <Navigate to="/login" />}
+          />
 
-          <Route path="/Wallet" element={isLoggedIn ? (<Wallet />) : (
-            <Navigate to="/login" />
-          )} />
-
+          <Route
+            path="/Wallet"
+            element={isLoggedIn ? <Wallet /> : <Navigate to="/login" />}
+          />
         </Routes>
       </Router>
     </div>
@@ -178,5 +187,3 @@ function App() {
 }
 
 export default App;
-
-

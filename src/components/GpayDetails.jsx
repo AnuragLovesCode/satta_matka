@@ -1,17 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { NavBar2 } from "./NavBar2";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { useForm } from "react-hook-form";
 
 const GpayDetails = () => {
   const token = localStorage.getItem("token") || "";
-  const [number, setNumber] = useState("");
-  const navigate=useNavigate()
+  const navigate = useNavigate();
+  
+  // Use react-hook-form
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm();
 
-  const verfifyGpayDetails = async () => {
+  const verfifyGpayDetails = async (data) => {
     const formData = new URLSearchParams();
-    formData.append("gpay", number);
+    formData.append("gpay", data.phoneNumber);
 
     try {
       const response = await fetch(
@@ -24,20 +27,23 @@ const GpayDetails = () => {
           body: formData,
         }
       );
-      const data = await response.json();
-      console.log(data);
+      const responseData = await response.json();
+      console.log(responseData);
 
-      toast.success(data.message);
+      toast.success(responseData.message);
       setTimeout(() => {
         navigate('/wallet')
       }, 2000);
     } catch (error) {
       console.error("ERROR", error);
-      toast.error("An Erro ocuurs during verfication");
+      toast.error("An Error occurs during verification");
     }
   };
 
-  
+  const handlePhoneNumberChange = (e) => {
+    const value = e.target.value.replace(/\D/g, '');
+    setValue('phoneNumber', value);
+  };
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -47,31 +53,51 @@ const GpayDetails = () => {
           <h2 className="text-2xl font-bold text-center mb-6 text-blue-950">
             GPay Details
           </h2>
-          <div className="mb-4">
-            <label
-              htmlFor="phone_number"
-              className="block text-gray-700 text-sm font-bold mb-2 text-left"
-            >
-              Phone Number
-            </label>
-            <div className="flex">
-              <div className="flex-grow">
-                <input
-                  id="phone_number"
-                  placeholder="Enter phone number"
-                  type="text"
-                  className="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-950 focus:border-transparent"
-                  onChange={(e)=>setNumber(e.target.value)}
-                />
+          <form onSubmit={handleSubmit(verfifyGpayDetails)}>
+            <div className="mb-4">
+              <label
+                htmlFor="phoneNumber"
+                className="block text-gray-700 text-sm font-bold mb-2 text-left"
+              >
+                Phone Number
+              </label>
+              <div className="flex">
+                <div className="flex-grow">
+                  <input
+                    id="phoneNumber"
+                    placeholder="Enter phone number"
+                    type="tel"
+                    inputMode="numeric"
+                    className={`w-full px-3 py-2 placeholder-gray-400 border ${
+                      errors.phoneNumber ? 'border-red-500' : 'border-gray-300'
+                    } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-950 focus:border-transparent`}
+                    {...register("phoneNumber", {
+                      required: "Phone number is required",
+                      pattern: {
+                        value: /^[0-9]{10}$/,
+                        message: "Please enter a valid 10-digit phone number"
+                      },
+                      onChange: handlePhoneNumberChange
+                    })}
+                  />
+                </div>
               </div>
+              {errors.phoneNumber && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.phoneNumber.message}
+                </p>
+              )}
             </div>
-          </div>
-          <div className="mt-6">
-            <button className="w-full px-4 py-2 bg-blue-950 text-white rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-950 focus:ring-opacity-50 transition duration-200 ease-in-out flex items-center justify-center" onClick={verfifyGpayDetails}>
-              <FaGoogle className="mr-2" />
-              Verify with Google Pay
-            </button>
-          </div>
+            <div className="mt-6">
+              <button
+                type="submit"
+                className="w-full px-4 py-2 bg-blue-950 text-white rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-950 focus:ring-opacity-50 transition duration-200 ease-in-out flex items-center justify-center"
+              >
+                <FaGoogle className="mr-2" />
+                Verify with Google Pay
+              </button>
+            </div>
+          </form>
           <ToastContainer/>
         </div>
       </div>

@@ -105,7 +105,7 @@ const Withdraw = () => {
           <button className="add-payment-method hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-md mb-2 sm:mb-0 mr-2 w-full sm:w-auto">
             ADD PAYMENT METHOD
           </button>
-          <button className="custom-color hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-md w-full sm:w-auto mt-2">
+          <button className="custom-color hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-md w-full sm:w-auto ">
             SUBMIT REQUEST
           </button>
         </div>

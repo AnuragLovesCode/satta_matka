@@ -22,8 +22,9 @@ const Transfer = () => {
   const [name, setName] = useState("");
   const [points, setPoints] = useState("");
   const [isVerified, setIsVerified] = useState(false);
+  const navigate =useNavigate()
 
-  const transferVerifyDetails = async (mobile: string) => {
+  const transferVerifyDetails = async () => {
     try {
       const formData = new URLSearchParams();
       formData.append("user_number", mobile);
@@ -54,9 +55,33 @@ const Transfer = () => {
     }
   };
 
-  const handleSubmit = () => {
-    // Handle form submission here
-    toast.success("Submitted successfully!");
+  const handleSubmit = async () => {
+    try {
+      const formData = new URLSearchParams();
+      formData.append("user_number", mobile);
+      formData.append("points", points);
+      const response = await fetch(
+        "https://development.smapidev.co.in/api/Api/transfer_points",
+        {
+          method: "POST",
+          headers: {
+            token,
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: formData,
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      toast.success(data.message);
+      setTimeout(() => {
+        navigate("/")
+      }, 2000);
+
+    } catch (error) {
+      console.error(error.response.data.message);
+      toast.error(error.response.data.message);
+    }
   };
 
   return (
@@ -64,7 +89,10 @@ const Transfer = () => {
       <NavBar2 isTransfer={true} />
       <div className="container mx-auto bg-white rounded-lg shadow-md p-6 mb-6 max-w-md">
         <div className="flex flex-col mb-4">
-          <label htmlFor="mobile" className="text-lg font-medium text-gray-700 text-left">
+          <label
+            htmlFor="mobile"
+            className="text-lg font-medium text-gray-700 text-left"
+          >
             Mobile
           </label>
           <input

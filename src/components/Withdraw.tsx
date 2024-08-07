@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaCoins, FaMobileAlt, FaGoogle, FaPaypal } from "react-icons/fa";
 import { NavBar2 } from "./NavBar2";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 // Define the type for a payment method
 interface PaymentMethod {
   label: string;
+  key: string;
   value: string;
 }
 
@@ -15,8 +16,7 @@ const Withdraw: React.FC = () => {
   const [closeTime, setCloseTime] = useState<string>("");
   const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>([]);
   const [points, setPoints] = useState<string>("");
-  const [selectedPaymentMethod, setSelectedPaymentMethod] =
-    useState<string>("");
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string>("");
   const navigate = useNavigate();
 
   const fetchBankDetails = async () => {
@@ -26,8 +26,8 @@ const Withdraw: React.FC = () => {
         {
           headers: {
             token,
-          "Content-Type": "application/x-www-form-urlencoded",
-          Cookie: "ci_session=0b0000be09ab15b1746f67a94c05d0d6761be9f3",
+            "Content-Type": "application/x-www-form-urlencoded",
+            Cookie: "ci_session=0b0000be09ab15b1746f67a94c05d0d6761be9f3",
           },
         }
       );
@@ -42,12 +42,12 @@ const Withdraw: React.FC = () => {
 
       console.log(data.data);
 
-      // Only include the keys that have non-empty values
+      // Updated to include the key in the PaymentMethod object
       const availableMethods: PaymentMethod[] = [
-        { label: "PhonePe No", value: phonepe_mobile_no },
-        { label: "GPay No", value: gpay_mobile_no },
-        { label: "Account No", value: bank_account_no },
-        { label: "Paytm No", value: paytm_mobile_no },
+        { label: "PhonePe No", key: "phonepe_mobile_no", value: phonepe_mobile_no },
+        { label: "GPay No", key: "gpay_mobile_no", value: gpay_mobile_no },
+        { label: "Account No", key: "bank_account_no", value: bank_account_no },
+        { label: "Paytm No", key: "paytm_mobile_no", value: paytm_mobile_no },
       ].filter((method) => method.value);
 
       setPaymentMethods(availableMethods);
@@ -75,14 +75,13 @@ const Withdraw: React.FC = () => {
         console.error("there is a problem in fetching data", error);
       }
     };
-    fetchContactDetails(); // fetchContactDetails calling here
+    fetchContactDetails();
   }, []);
 
   const createPayment = async () => {
-    // Assuming selectedPaymentMethod holds the actual value like 'phonepe_mobile_no'
     const formData = new URLSearchParams();
     formData.append("points", points);
-    formData.append("method", selectedPaymentMethod); // This sends the value of the selected method
+    formData.append("method", selectedPaymentMethod); // This now sends the key (e.g., "phonepe_mobile_no")
 
     try {
       const response = await fetch(
@@ -170,10 +169,11 @@ const Withdraw: React.FC = () => {
         <select
           className="mt-1 p-2 block w-full border border-black-800 rounded-md text-custom"
           value={selectedPaymentMethod}
-          onChange={(e) => setSelectedPaymentMethod(e.target.value)} // This will set the actual value like phonepe_mobile_no
+          onChange={(e) => setSelectedPaymentMethod(e.target.value)}
         >
+          <option value="">Select a payment method</option>
           {paymentMethods.map((method, index) => (
-            <option key={index} value={method.value}>
+            <option key={index} value={method.key}>
               {method.label}
             </option>
           ))}

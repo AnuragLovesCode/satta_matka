@@ -24,9 +24,7 @@ const PhonePay = () => {
                   className="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-950 focus:border-transparent"
                 />
               </div>
-              <button className="ml-2 px-4 py-2 bg-blue-950 text-white rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-950 focus:ring-opacity-50 transition duration-200 ease-in-out">
-                Verify
-              </button>
+              
             </div>
           </div>
           <div className="mt-6">

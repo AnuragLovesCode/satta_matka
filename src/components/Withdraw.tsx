@@ -1,13 +1,13 @@
-import  { useEffect , useState} from "react";
+import { useEffect, useState } from "react";
 import { FaCoins, FaMobileAlt, FaGoogle, FaPaypal } from "react-icons/fa";
 import { NavBar2 } from "./NavBar2";
 import { useNavigate } from "react-router-dom";
 
 const Withdraw = () => {
   const token = localStorage.getItem("token") || "";
-  const [openTime, setOpenTime] = useState('')
-  const [closeTime, setCloseTime] = useState('')
-  const navigate=useNavigate()
+  const [openTime, setOpenTime] = useState("");
+  const [closeTime, setCloseTime] = useState("");
+  const navigate = useNavigate();
 
   const createPayment = async () => {
     try {
@@ -33,7 +33,6 @@ const Withdraw = () => {
     } catch (error) {}
   };
 
-
   useEffect(() => {
     const fetchContactDetails = async () => {
       try {
@@ -43,8 +42,8 @@ const Withdraw = () => {
         if (!response.ok) throw new Error("contact details is not fetched");
         const data = await response.json();
         // setContactDetails(data.data.contact_details);
-        setOpenTime(data.data.withdraw_open_time)
-        setCloseTime(data.data.withdraw_close_time)
+        setOpenTime(data.data.withdraw_open_time);
+        setCloseTime(data.data.withdraw_close_time);
       } catch (error) {
         console.error("there is a problem in fetching data", error);
       }
@@ -67,16 +66,28 @@ const Withdraw = () => {
         </h2>
       </div>
       <div className="container flex overflow-x-auto space-x-4">
-        <button className="flex flex-col items-center space-y-1 border border-blue-900 text-blue-500 px-4 py-2 rounded-md pl-4" onClick={()=>navigate("/bank-details")}>
+        <button
+          className="flex flex-col items-center space-y-1 border border-blue-900 text-blue-500 px-4 py-2 rounded-md pl-4"
+          onClick={() => navigate("/bank-details")}
+        >
           <FaCoins className="text-3xl" /> <span>Bank</span>
         </button>
-        <button className="flex flex-col items-center space-y-1 border border-green-500 text-green-500 px-4 py-2 rounded-md pl-4" onClick={()=>navigate("/phonepe")}>
+        <button
+          className="flex flex-col items-center space-y-1 border border-green-500 text-green-500 px-4 py-2 rounded-md pl-4"
+          onClick={() => navigate("/phonepe")}
+        >
           <FaMobileAlt className="text-3xl" /> <span>Phone Pay</span>
         </button>
-        <button className="flex flex-col items-center space-y-1 border border-yellow-500 text-yellow-500 px-4 py-2 rounded-md pl-4" onClick={()=>navigate("/gpay")}>
+        <button
+          className="flex flex-col items-center space-y-1 border border-yellow-500 text-yellow-500 px-4 py-2 rounded-md pl-4"
+          onClick={() => navigate("/gpay")}
+        >
           <FaGoogle className="text-3xl" /> <span>Google Pay</span>
         </button>
-        <button className="flex flex-col items-center space-y-1 border border-indigo-500 text-indigo-500 px-4 py-2 rounded-md pl-4" onClick={()=>navigate("/paytm")}> 
+        <button
+          className="flex flex-col items-center space-y-1 border border-indigo-500 text-indigo-500 px-4 py-2 rounded-md pl-4"
+          onClick={() => navigate("/paytm")}
+        >
           <FaPaypal className="text-3xl" /> <span>Paytm</span>
         </button>
       </div>
@@ -103,7 +114,6 @@ const Withdraw = () => {
           Select Payment Method
         </h2>
         <select>
-
           <option>Phone Pe</option>
           <option>Paytm</option>
           <option>Google Pe</option>

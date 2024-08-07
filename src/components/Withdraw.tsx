@@ -11,7 +11,7 @@ const Withdraw = () => {
 
   const createPayment = async () => {
     try {
-      const response = await fetch("https://smapidev.co.in/api/Api/withdraw", {
+      const response = await fetch("https://development.smapidev.co.in/api/Api/withdraw", {
         method: "POST",
         // body: formData,
         headers: {

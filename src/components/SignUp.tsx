@@ -31,7 +31,7 @@ const SignupForm: React.FC = () => {
       formData.append("password", data.password);
       const mobileNum = data.mobile;
 
-      const response = await fetch("https://smapidev.co.in/api/Api/signup", {
+      const response = await fetch("https://development.smapidev.co.in/api/Api/signup", {
         method: "POST",
         body: formData,
         headers: {

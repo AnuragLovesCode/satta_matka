@@ -23,7 +23,7 @@ const ForgotPassword: React.FC = () => {
       formData.append("mobile", data.mobile);
 
       const response = await fetch(
-        "https://smapidev.co.in/api/Api/forgot_password",
+        "https://development.smapidev.co.in/api/Api/forgot_password",
         {
           method: "POST",
           body: formData,

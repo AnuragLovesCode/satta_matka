@@ -5,6 +5,8 @@ import { NavBar2 } from "./NavBar2";
 const GpayDetails = () => {
   const token = localStorage.getItem("token") || "";
 
+  
+
   return (
     <div className="min-h-screen bg-gray-100">
       <NavBar2 isWithdraw={true} />

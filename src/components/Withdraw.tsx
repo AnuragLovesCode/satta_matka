@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaCoins, FaMobileAlt, FaGoogle, FaPaypal } from "react-icons/fa";
 import { NavBar2 } from "./NavBar2";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 // Define the type for a payment method
 interface PaymentMethod {
@@ -97,6 +98,7 @@ const Withdraw: React.FC = () => {
       );
       const data = await response.json();
       console.log(data);
+      toast.success(data.message)
     } catch (error) {
       console.error("Failed to create payment:", error);
     }
@@ -188,6 +190,7 @@ const Withdraw: React.FC = () => {
           </button>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 };

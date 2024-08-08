@@ -24,9 +24,9 @@ const StarLine: React.FC = () => {
   const gameList = async () => {
     try {
 
-      let url = "https://smapidev.co.in/api/Api/gali_disawar_game"
+      let url = "https://development.smapidev.co.in/api/Api/gali_disawar_game"
       if (location?.state?.startLine) {
-        url = "https://smapidev.co.in/api/Api/starline_game"
+        url = "https://development.smapidev.co.in/api/Api/starline_game"
       }
 
       const response = await fetch(url,

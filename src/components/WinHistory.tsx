@@ -27,9 +27,10 @@ export const WinHistory: React.FC = () => {
       formData.append("from_date", fromDate);
       formData.append("to_date", toDate);
 
-      let apiUrl = "https://smapidev.co.in/api/Api/win_history";
+      let apiUrl = "https://development.smapidev.co.in/api/Api/win_history";
       if (location?.state?.starLine) {
-        apiUrl = "https://smapidev.co.in/api/Api/starline_win_history";
+        apiUrl =
+          "https://development.smapidev.co.in/api/Api/starline_win_history";
       }
 
       const response = await fetch(apiUrl, {

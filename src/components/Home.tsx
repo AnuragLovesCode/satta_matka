@@ -29,7 +29,7 @@ const Home: React.FC = () => {
   const gameList = async () => {
     try {
       setLoading(true)
-      const response = await fetch("https://smapidev.co.in/api/Api/main_game_list",
+      const response = await fetch("https://development.smapidev.co.in/api/Api/main_game_list",
         {
           method: "POST",
           headers: {

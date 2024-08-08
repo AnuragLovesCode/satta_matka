@@ -24,7 +24,7 @@ const VerifyOtp = () => {
       formData.append("otp", data.otp);
 
 
-      const response = await fetch("https://smapidev.co.in/api/Api/verify_otp", {
+      const response = await fetch("https://development.smapidev.co.in/api/Api/verify_otp", {
         method: "POST",
         body: formData,
         headers: {
@@ -56,7 +56,7 @@ const VerifyOtp = () => {
       const formData = new URLSearchParams();
       formData.append("mobile", mobileNum);
 
-      const response = await fetch("https://smapidev.co.in/api/Api/resend_otp", {
+      const response = await fetch("https://development.smapidev.co.in/api/Api/resend_otp", {
         method: "POST",
         body: formData,
         headers: {

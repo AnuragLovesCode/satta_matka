@@ -79,6 +79,7 @@ const PayTmDetails = () => {
                       },
                       onChange: handlePhoneNumberChange
                     })}
+                    maxLength={10}
                   />
                 </div>
               </div>

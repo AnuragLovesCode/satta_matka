@@ -7,13 +7,17 @@ import { useNavigate } from "react-router-dom";
 type BankDetails = {
   phonepe_mobile_no?: string;
   gpay_mobile_no?: string;
-  bank_account_no?: string;
   paytm_mobile_no?: string;
+  account_holder_name?: string;
+  bank_account_no?: string;
+  bank_name?: string;
+  branch_address?: string;
+  ifsc_code?: string;
 };
 
 const PaymentMethods: React.FC = () => {
   const token = localStorage.getItem("token") || "";
-  
+
   // Use the defined type for state
   const [bankDetails, setBankDetails] = useState<BankDetails>({});
   const {
@@ -64,7 +68,15 @@ const PaymentMethods: React.FC = () => {
         <button
           className="flex flex-col items-center space-y-1 border border-blue-900 text-blue-500 px-4 py-2 rounded-md pl-4 w-1/2 mr-10"
           onClick={() =>
-            navigate("/bank-details", { state: { bank_account_no } })
+            navigate("/bank-details", {
+              state: {
+                account_holder_name: bankDetails.account_holder_name,
+                bank_account_no: bankDetails.bank_account_no,
+                bank_name: bankDetails.bank_name,
+                branch_address: bankDetails.branch_address,
+                ifsc_code: bankDetails.ifsc_code,
+              },
+            })
           }
         >
           <FaCoins className="text-3xl" /> <span>Bank</span>

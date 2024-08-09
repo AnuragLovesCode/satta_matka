@@ -34,10 +34,10 @@ const BankDetails = () => {
 
   useEffect(() => {
     setValue("accountNumber", accountNumber);
-    setValue("ifscCode",ifscCode);
-    setValue("branchAddress",branchAddress);
-    setValue("bankName",bankName);
-    setValue("accountHolderName",accountHolderName);
+    setValue("ifscCode", ifscCode);
+    setValue("branchAddress", branchAddress);
+    setValue("bankName", bankName);
+    setValue("accountHolderName", accountHolderName);
   }, [accountNumber, setValue]);
 
   const verfifyBankDetails = async (data) => {

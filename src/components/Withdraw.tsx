@@ -46,13 +46,13 @@ const Withdraw: React.FC = () => {
 
       const availableMethods: PaymentMethod[] = [
         {
-          label: "PhonePe No",
+          label: "PhonePe",
           key: "phonepe_mobile_no",
           value: phonepe_mobile_no,
         },
-        { label: "GPay No", key: "gpay_mobile_no", value: gpay_mobile_no },
-        { label: "Account No", key: "bank_account_no", value: bank_account_no },
-        { label: "Paytm No", key: "paytm_mobile_no", value: paytm_mobile_no },
+        { label: "GPay", key: "gpay_mobile_no", value: gpay_mobile_no },
+        { label: "Account", key: "bank_account_no", value: bank_account_no },
+        { label: "Paytm", key: "paytm_mobile_no", value: paytm_mobile_no },
       ].filter((method) => method.value);
 
       setPaymentMethods(availableMethods);
@@ -208,7 +208,7 @@ const Withdraw: React.FC = () => {
           <option value="">Select a payment method</option>
           {paymentMethods.map((method, index) => (
             <option key={index} value={method.key}>
-              {method.label}
+              {method.label} {method.value}
             </option>
           ))}
         </select>

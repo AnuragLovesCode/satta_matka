@@ -19,8 +19,10 @@ type DataType = {
 export const BidHistory: React.FC = () => {
   const location = useLocation();
   const token = localStorage.getItem("token") || "";
-  const [fromDate, setFromDate] = useState<string>("");
-  const [toDate, setToDate] = useState<string>("");
+
+  const today = new Date().toISOString().split("T")[0]; // Get today's date in "YYYY-MM-DD" format
+  const [fromDate, setFromDate] = useState<string>(today); // Initialize with today's date
+  const [toDate, setToDate] = useState<string>(today); // Initialize with today's date
 
   const [historyDetails, setHistoryDetails] = useState<DataType[]>([]);
 

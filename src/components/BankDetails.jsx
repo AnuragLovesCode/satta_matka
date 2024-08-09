@@ -11,6 +11,19 @@ const BankDetails = () => {
   const location = useLocation();
   const accountNumber = location.state?.bank_account_no || "";
 
+  const bankName = location.state?.bank_name || "";
+  const branchAddress = location.state?.branch_address || "";
+  const ifscCode = location.state?.ifsc_code || "";
+  const accountHolderName = location.state?.account_holder_name || "";
+
+  console.log(
+    accountHolderName,
+    bankName,
+    branchAddress,
+    ifscCode,
+    accountNumber
+  );
+
   // Use react-hook-form
   const {
     register,
@@ -21,6 +34,10 @@ const BankDetails = () => {
 
   useEffect(() => {
     setValue("accountNumber", accountNumber);
+    setValue("ifscCode",ifscCode);
+    setValue("branchAddress",branchAddress);
+    setValue("bankName",bankName);
+    setValue("accountHolderName",accountHolderName);
   }, [accountNumber, setValue]);
 
   const verfifyBankDetails = async (data) => {
@@ -78,7 +95,7 @@ const BankDetails = () => {
                     placeholder="Enter Account Holder Name"
                     type="text"
                     className="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-950 focus:border-transparent"
-                    {...register("holderName")}
+                    {...register("accountHolderName")}
                   />
                 </div>
               </div>

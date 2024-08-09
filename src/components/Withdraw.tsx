@@ -10,6 +10,13 @@ interface PaymentMethod {
   key: string;
   value: string;
 }
+type Bankdetails = {
+  account_holder_name?: string;
+  bank_account_no?: string;
+  bank_name?: string;
+  branch_address?: string;
+  ifsc_code?: string;
+};
 
 const Withdraw: React.FC = () => {
   const token = localStorage.getItem("token") || "";
@@ -20,6 +27,7 @@ const Withdraw: React.FC = () => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState<string>("");
   const navigate = useNavigate();
+  const [bankDetails, setBankDetails] = useState<Bankdetails>({});
 
   const fetchBankDetails = async () => {
     try {
@@ -43,6 +51,7 @@ const Withdraw: React.FC = () => {
       } = data.data;
 
       console.log(data.data);
+      setBankDetails(data.data);
 
       const availableMethods: PaymentMethod[] = [
         {
@@ -131,7 +140,13 @@ const Withdraw: React.FC = () => {
             );
             if (method)
               navigate("/bank-details", {
-                state: { bank_account_no: method.value },
+                state: {
+                  account_holder_name: bankDetails.account_holder_name,
+                  bank_account_no: bankDetails.bank_account_no,
+                  bank_name: bankDetails.bank_name,
+                  branch_address: bankDetails.branch_address,
+                  ifsc_code: bankDetails.ifsc_code,
+                },
               });
           }}
         >

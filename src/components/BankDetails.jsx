@@ -1,16 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaCoins } from "react-icons/fa";
 import { NavBar2 } from "./NavBar2";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { useForm } from "react-hook-form";
 
 const BankDetails = () => {
   const token = localStorage.getItem("token") || "";
   const navigate = useNavigate();
+  const location = useLocation();
+  const accountNumber = location.state?.bank_account_no || "";
 
   // Use react-hook-form
-  const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm();
+
+  useEffect(() => {
+    setValue("accountNumber", accountNumber);
+  }, [accountNumber, setValue]);
 
   const verfifyBankDetails = async (data) => {
     const formData = new URLSearchParams();
@@ -86,7 +97,9 @@ const BankDetails = () => {
                     placeholder="Enter Account Number"
                     type="number"
                     className={`w-full px-3 py-2 placeholder-gray-400 border ${
-                      errors.accountNumber ? 'border-red-500' : 'border-gray-300'
+                      errors.accountNumber
+                        ? "border-red-500"
+                        : "border-gray-300"
                     } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-950 focus:border-transparent`}
                     {...register("accountNumber", {
                       required: "Account Number is required",
@@ -96,7 +109,7 @@ const BankDetails = () => {
                       },
                     })}
                     onInput={(e) => {
-                      e.target.value = e.target.value.replace(/[^0-9]/g, '');
+                      e.target.value = e.target.value.replace(/[^0-9]/g, "");
                     }}
                   />
                 </div>

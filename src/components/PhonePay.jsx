@@ -8,7 +8,12 @@ import { useForm } from "react-hook-form";
 const PhonePay = () => {
   const token = localStorage.getItem("token") || "";
   const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm();
 
   const verifyPhonePeDetails = async (data) => {
     const formData = new URLSearchParams();
@@ -39,18 +44,15 @@ const PhonePay = () => {
   };
 
   const handlePhoneNumberChange = (e) => {
-    const value = e.target.value.replace(/\D/g, '');
-    setValue('phoneNumber', value);
+    const value = e.target.value.replace(/\D/g, "");
+    setValue("phoneNumber", value);
   };
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <NavBar2 isWithdraw={true} />
+      <NavBar2 isPhonePe={true} />
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-2xl font-bold text-center mb-6 text-blue-950">
-            PhonePe Details
-          </h2>
           <form onSubmit={handleSubmit(verifyPhonePeDetails)}>
             <div className="mb-4">
               <label
@@ -67,15 +69,15 @@ const PhonePay = () => {
                     type="tel"
                     inputMode="numeric"
                     className={`w-full px-3 py-2 placeholder-gray-400 border ${
-                      errors.phoneNumber ? 'border-red-500' : 'border-gray-300'
+                      errors.phoneNumber ? "border-red-500" : "border-gray-300"
                     } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-950 focus:border-transparent`}
                     {...register("phoneNumber", {
                       required: "Phone number is required",
                       pattern: {
                         value: /^[0-9]{10}$/,
-                        message: "Please enter a valid 10-digit phone number"
+                        message: "Please enter a valid 10-digit phone number",
                       },
-                      onChange: handlePhoneNumberChange
+                      onChange: handlePhoneNumberChange,
                     })}
                     maxLength={10}
                   />

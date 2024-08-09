@@ -28,6 +28,10 @@ interface NavBar2Props {
   isFullSangam?: boolean;
   isTripplePanna?: boolean;
   isTransfer?: boolean;
+  isGpay?: boolean;
+  isPhonePe?: boolean;
+  isPaytm?: boolean;
+  isBank?:boolean
 }
 // Define the type for each transaction in the statement
 type DataType = {
@@ -58,6 +62,7 @@ export const NavBar2: React.FC<NavBar2Props> = ({
   isGameTime,
   isEditProfile,
   isWithdraw,
+  isGpay,
   isChangePassword,
   isDoublePanna,
   isGameRates,
@@ -72,6 +77,9 @@ export const NavBar2: React.FC<NavBar2Props> = ({
   isHalfSangam,
   isFullSangam,
   isTransfer,
+  isPhonePe,
+  isPaytm,
+  isBank
 }) => {
   const navigate = useNavigate();
 
@@ -182,6 +190,61 @@ export const NavBar2: React.FC<NavBar2Props> = ({
         <div className="navbar-main p-3 mb-6 text-left flex items-center text-white">
           <FaArrowLeft onClick={() => navigate(-1)} cursor="pointer" />
           <button className="ml-3 flex items-center font-bold">Withdraw</button>
+          <button className="text-right w-100 flex justify-end align-center items-center ml-2">
+            {" "}
+            <span className="mr-2">
+              <FaWallet size={30} />{" "}
+            </span>{" "}
+            {transcationData?.available_points}
+          </button>
+        </div>
+      ) : null}
+
+      {isGpay ? (
+        <div className="navbar-main p-3 mb-6 text-left flex items-center text-white">
+          <FaArrowLeft onClick={() => navigate(-1)} cursor="pointer" />
+          <button className="ml-3 flex items-center font-bold">Gpay</button>
+          <button className="text-right w-100 flex justify-end align-center items-center ml-2">
+            {" "}
+            <span className="mr-2">
+              <FaWallet size={30} />{" "}
+            </span>{" "}
+            {transcationData?.available_points}
+          </button>
+        </div>
+      ) : null}
+
+      {isPhonePe ? (
+        <div className="navbar-main p-3 mb-6 text-left flex items-center text-white">
+          <FaArrowLeft onClick={() => navigate(-1)} cursor="pointer" />
+          <button className="ml-3 flex items-center font-bold">PhonePe</button>
+          <button className="text-right w-100 flex justify-end align-center items-center ml-2">
+            {" "}
+            <span className="mr-2">
+              <FaWallet size={30} />{" "}
+            </span>{" "}
+            {transcationData?.available_points}
+          </button>
+        </div>
+      ) : null}
+
+      {isPaytm ? (
+        <div className="navbar-main p-3 mb-6 text-left flex items-center text-white">
+          <FaArrowLeft onClick={() => navigate(-1)} cursor="pointer" />
+          <button className="ml-3 flex items-center font-bold">PayTM</button>
+          <button className="text-right w-100 flex justify-end align-center items-center ml-2">
+            {" "}
+            <span className="mr-2">
+              <FaWallet size={30} />{" "}
+            </span>{" "}
+            {transcationData?.available_points}
+          </button>
+        </div>
+      ) : null}
+       {isBank ? (
+        <div className="navbar-main p-3 mb-6 text-left flex items-center text-white">
+          <FaArrowLeft onClick={() => navigate(-1)} cursor="pointer" />
+          <button className="ml-3 flex items-center font-bold">Bank</button>
           <button className="text-right w-100 flex justify-end align-center items-center ml-2">
             {" "}
             <span className="mr-2">

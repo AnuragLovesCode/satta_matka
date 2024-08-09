@@ -47,7 +47,7 @@ const PayTmDetails = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <NavBar2 isWithdraw={true} />
+      <NavBar2 isPaytm={true} />
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
           <h2 className="text-2xl font-bold text-center mb-6 text-blue-950">

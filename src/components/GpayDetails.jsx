@@ -9,11 +9,21 @@ const GpayDetails = () => {
   const token = localStorage.getItem("token") || "";
   const navigate = useNavigate();
   const location = useLocation();
-  const gpayNumber= location.state?.gpay_mobile_no || ""
-  console.log(gpayNumber)
-  
+  const gpayNumber = location.state?.gpay_mobile_no || "";
+  console.log(gpayNumber);
+
   // Use react-hook-form
-  const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm();
+
+  useEffect(() => {
+    // pre filled the form with the gpay number from navigation state
+    setValue("gpayNumber", gpayNumber);
+  }, [gpayNumber, setValue]);
 
   const verfifyGpayDetails = async (data) => {
     const formData = new URLSearchParams();
@@ -35,7 +45,7 @@ const GpayDetails = () => {
 
       toast.success(responseData.message);
       setTimeout(() => {
-        navigate('/wallet')
+        navigate("/wallet");
       }, 2000);
     } catch (error) {
       console.error("ERROR", error);
@@ -43,13 +53,9 @@ const GpayDetails = () => {
     }
   };
 
-  useEffect(()=>{
-    setValue("gpay",gpayNumber);
-  },[gpayNumber, setValue])
-
   const handlePhoneNumberChange = (e) => {
-    const value = e.target.value.replace(/\D/g, '');
-    setValue('phoneNumber', value);
+    const value = e.target.value.replace(/\D/g, "");
+    setValue("gpayNumber", value);
   };
 
   return (
@@ -73,15 +79,15 @@ const GpayDetails = () => {
                     type="tel"
                     inputMode="numeric"
                     className={`w-full px-3 py-2 placeholder-gray-400 border ${
-                      errors.phoneNumber ? 'border-red-500' : 'border-gray-300'
+                      errors.phoneNumber ? "border-red-500" : "border-gray-300"
                     } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-950 focus:border-transparent`}
-                    {...register("phoneNumber", {
+                    {...register("gpayNumber", {
                       required: "Phone number is required",
                       pattern: {
                         value: /^[0-9]{10}$/,
-                        message: "Please enter a valid 10-digit phone number"
+                        message: "Please enter a valid 10-digit phone number",
                       },
-                      onChange: handlePhoneNumberChange
+                      onChange: handlePhoneNumberChange,
                     })}
                     maxLength={10}
                   />
@@ -103,7 +109,7 @@ const GpayDetails = () => {
               </button>
             </div>
           </form>
-          <ToastContainer/>
+          <ToastContainer />
         </div>
       </div>
     </div>

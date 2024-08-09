@@ -2,15 +2,28 @@ import { useEffect, useState } from "react";
 import { FaPaypal } from "react-icons/fa";
 import { NavBar2 } from "./NavBar2";
 import { toast, ToastContainer } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 const PayTmDetails = () => {
   const token = localStorage.getItem("token") || "";
   const navigate = useNavigate();
-  
+  const location = useLocation();
+
+  const payTMNumber = location.state?.paytm_mobile_no || "";
+  console.log(payTMNumber)
+
   // Use react-hook-form
-  const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm();
+
+  useEffect(() => {
+    setValue("payTMNumber", payTMNumber);
+  }, [payTMNumber, setValue]);
 
   const verfifyPayTMDetails = async (data) => {
     const formData = new URLSearchParams();
@@ -32,7 +45,7 @@ const PayTmDetails = () => {
 
       toast.success(responseData.message);
       setTimeout(() => {
-        navigate('/wallet')
+        navigate("/wallet");
       }, 2000);
     } catch (error) {
       console.error("ERROR", error);
@@ -41,8 +54,8 @@ const PayTmDetails = () => {
   };
 
   const handlePhoneNumberChange = (e) => {
-    const value = e.target.value.replace(/\D/g, '');
-    setValue('phoneNumber', value);
+    const value = e.target.value.replace(/\D/g, "");
+    setValue("phoneNumber", value);
   };
 
   return (
@@ -66,15 +79,15 @@ const PayTmDetails = () => {
                     type="tel"
                     inputMode="numeric"
                     className={`w-full px-3 py-2 placeholder-gray-400 border ${
-                      errors.phoneNumber ? 'border-red-500' : 'border-gray-300'
+                      errors.payTMNumber ? "border-red-500" : "border-gray-300"
                     } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-950 focus:border-transparent`}
-                    {...register("phoneNumber", {
+                    {...register("payTMNumber", {
                       required: "Phone number is required",
                       pattern: {
                         value: /^[0-9]{10}$/,
-                        message: "Please enter a valid 10-digit phone number"
+                        message: "Please enter a valid 10-digit phone number",
                       },
-                      onChange: handlePhoneNumberChange
+                      onChange: handlePhoneNumberChange,
                     })}
                     maxLength={10}
                   />
@@ -97,7 +110,7 @@ const PayTmDetails = () => {
             </div>
           </form>
         </div>
-        <ToastContainer/>
+        <ToastContainer />
       </div>
     </div>
   );

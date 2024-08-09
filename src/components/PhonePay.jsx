@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaMobileAlt } from "react-icons/fa";
 import { NavBar2 } from "./NavBar2";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { useForm } from "react-hook-form";
 
 const PhonePay = () => {
   const token = localStorage.getItem("token") || "";
   const navigate = useNavigate();
+  const location = useLocation();
+  const phonepeNumber = location.state?.phonepe_mobile_no || "";
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
   } = useForm();
+
+  useEffect(() => {
+    // Pre-fill the form with the PhonePe number from navigation state
+    setValue("phoneNumber", phonepeNumber);
+  }, [phonepeNumber, setValue]);
 
   const verifyPhonePeDetails = async (data) => {
     const formData = new URLSearchParams();

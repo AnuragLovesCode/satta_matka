@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { NavBar2 } from "./NavBar2";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { useForm } from "react-hook-form";
 
 const GpayDetails = () => {
   const token = localStorage.getItem("token") || "";
   const navigate = useNavigate();
+  const location = useLocation();
+  const gpayNumber= location.state?.gpay_mobile_no || ""
+  console.log(gpayNumber)
   
   // Use react-hook-form
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
@@ -39,6 +42,10 @@ const GpayDetails = () => {
       toast.error("An Error occurs during verification");
     }
   };
+
+  useEffect(()=>{
+    setValue("gpay",gpayNumber);
+  },[gpayNumber, setValue])
 
   const handlePhoneNumberChange = (e) => {
     const value = e.target.value.replace(/\D/g, '');

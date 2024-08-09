@@ -17,7 +17,8 @@ const Withdraw: React.FC = () => {
   const [closeTime, setCloseTime] = useState<string>("");
   const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>([]);
   const [points, setPoints] = useState<string>("");
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string>("");
+  const [selectedPaymentMethod, setSelectedPaymentMethod] =
+    useState<string>("");
   const navigate = useNavigate();
 
   const fetchBankDetails = async () => {
@@ -43,9 +44,12 @@ const Withdraw: React.FC = () => {
 
       console.log(data.data);
 
-      // Updated to include the key in the PaymentMethod object
       const availableMethods: PaymentMethod[] = [
-        { label: "PhonePe No", key: "phonepe_mobile_no", value: phonepe_mobile_no },
+        {
+          label: "PhonePe No",
+          key: "phonepe_mobile_no",
+          value: phonepe_mobile_no,
+        },
         { label: "GPay No", key: "gpay_mobile_no", value: gpay_mobile_no },
         { label: "Account No", key: "bank_account_no", value: bank_account_no },
         { label: "Paytm No", key: "paytm_mobile_no", value: paytm_mobile_no },
@@ -82,7 +86,7 @@ const Withdraw: React.FC = () => {
   const createPayment = async () => {
     const formData = new URLSearchParams();
     formData.append("points", points);
-    formData.append("method", selectedPaymentMethod); // This now sends the key (e.g., "phonepe_mobile_no")
+    formData.append("method", selectedPaymentMethod);
 
     try {
       const response = await fetch(
@@ -98,7 +102,7 @@ const Withdraw: React.FC = () => {
       );
       const data = await response.json();
       console.log(data);
-      toast.success(data.message)
+      toast.success(data.message);
     } catch (error) {
       console.error("Failed to create payment:", error);
     }
@@ -121,25 +125,53 @@ const Withdraw: React.FC = () => {
       <div className="container flex overflow-x-auto space-x-4">
         <button
           className="flex flex-col items-center space-y-1 border border-blue-900 text-blue-500 px-4 py-2 rounded-md pl-4"
-          onClick={() => navigate("/bank-details")}
+          onClick={() => {
+            const method = paymentMethods.find(
+              (m) => m.key === "bank_account_no"
+            );
+            if (method)
+              navigate("/bank-details", {
+                state: { bank_account_no: method.value },
+              });
+          }}
         >
           <FaCoins className="text-3xl" /> <span>Bank</span>
         </button>
         <button
           className="flex flex-col items-center space-y-1 border border-green-500 text-green-500 px-4 py-2 rounded-md pl-4"
-          onClick={() => navigate("/phonepe")}
+          onClick={() => {
+            const method = paymentMethods.find(
+              (m) => m.key === "phonepe_mobile_no"
+            );
+            if (method)
+              navigate("/phonepe", {
+                state: { phonepe_mobile_no: method.value },
+              });
+          }}
         >
           <FaMobileAlt className="text-3xl" /> <span>PhonePe</span>
         </button>
         <button
           className="flex flex-col items-center space-y-1 border border-yellow-500 text-yellow-500 px-4 py-2 rounded-md pl-4"
-          onClick={() => navigate("/gpay")}
+          onClick={() => {
+            const method = paymentMethods.find(
+              (m) => m.key === "gpay_mobile_no"
+            );
+            if (method)
+              navigate("/gpay", { state: { gpay_mobile_no: method.value } });
+          }}
         >
           <FaGoogle className="text-3xl" /> <span>Google Pay</span>
         </button>
         <button
           className="flex flex-col items-center space-y-1 border border-indigo-500 text-indigo-500 px-4 py-2 rounded-md pl-4"
-          onClick={() => navigate("/paytm")}
+          onClick={() => {
+            const method = paymentMethods.find(
+              (m) => m.key === "paytm_mobile_no"
+            );
+            if (method)
+              navigate("/paytm", { state: { paytm_mobile_no: method.value } });
+          }}
         >
           <FaPaypal className="text-3xl" /> <span>Paytm</span>
         </button>
@@ -190,7 +222,7 @@ const Withdraw: React.FC = () => {
           </button>
         </div>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 };

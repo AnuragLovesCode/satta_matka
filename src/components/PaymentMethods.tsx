@@ -57,13 +57,7 @@ const PaymentMethods: React.FC = () => {
 
   return (
     <div className="px-15">
-      <NavBar2 isWithdraw={true} />
-
-      <div className="custom-color text-white shadow-md p-2 mb-3 w-100">
-        <div className="flex items-center justify-around mb-2">
-          <p className="text-lg font-semibold">Select Payment Methods</p>
-        </div>
-      </div>
+      <NavBar2 isPyamentMethod={true} />
       <div className="container flex justify-evenly">
         <button
           className="flex flex-col items-center space-y-1 border border-blue-900 text-blue-500 px-4 py-2 rounded-md pl-4 w-1/2 mr-10"
